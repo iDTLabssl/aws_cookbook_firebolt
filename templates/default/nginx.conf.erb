@@ -1,0 +1,76 @@
+#odoo server
+upstream ezbank {
+server <%= node[:nginx][:sugarloaf_internal_ip] %>:8080;
+}
+
+
+server {
+
+listen [::]:80;
+listen 80;
+
+# The host name to respond to
+server_name ~^(?
+<subdomain>\w+)\.ezbank\.io$;
+
+  proxy_connect_timeout 720s;
+  proxy_send_timeout 720s;
+  proxy_read_timeout 720s;
+  send_timeout 720s;
+
+  # Add Headers for tomcat proxy mode
+  proxy_set_header Host $host;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto $scheme;
+  proxy_set_header Fineract-Platform-TenantId $subdomain;
+
+
+  keepalive_timeout 300s; # up from 75 secs default
+
+  # common gzip
+  gzip_types text/css text/less text/plain text/xml application/xml application/json application/javascript;
+  gzip on;
+
+
+  # Redirect requests to odoo backend server
+  location / {
+  proxy_redirect off;
+  proxy_pass http://ezbank;
+  }
+
+  #Specify a charset
+  charset utf-8;
+
+
+  # cache.appcache, your document html and data
+  location ~* \.(?:manifest|appcache|html?|xml|json)$ {
+  expires -1;
+  proxy_pass http://ezbank;
+  }
+
+  # Media: images, icons, video, audio, HTC
+  location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc)$ {
+  expires 1M;
+  access_log off;
+  add_header Cache-Control "public";
+  proxy_pass http://ezbank;
+  }
+
+  # CSS and Javascript
+  location ~* \.(?:css|js)$ {
+  expires 1M;
+  access_log off;
+  proxy_pass http://ezbank;
+  }
+
+  location ~* /\.(?!well-known\/) {
+  deny all;
+  }
+
+  # Prevent clients from accessing to backup/config/source files
+  location ~* (?:\.(?:bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$ {
+  deny all;
+  }
+
+  }
