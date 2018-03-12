@@ -24,13 +24,5 @@ default[:firebolt][:airtel_smsCentreNumber] = '1'
 default[:firebolt][:admin_username] = 'admin'
 default[:firebolt][:admin_password] = 'password'
 
-
-
-
-
-
-
-
-
 default[:project_name] = 'firebolt'
 default[:project_url] = 'firebolt.io'
