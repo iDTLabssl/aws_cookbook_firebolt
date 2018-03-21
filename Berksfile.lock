@@ -1,0 +1,73 @@
+DEPENDENCIES
+  apt
+  aws
+  build-essential
+  datadog
+  firebolt
+    path: .
+    metadata: true
+  idt_infra_tools
+    git: git://github.com/tarzan0820/chef-idt-infrac-common.git
+    revision: 9898746380d36e9469a6d9d4442a75ebff7c2afa
+  java
+  ohai
+  openssl
+  papertrail (~> 1.0.1)
+  python
+  rsyslog
+  supervisor
+  tar
+
+GRAPH
+  apt (6.1.4)
+  aws (7.2.2)
+  build-essential (8.0.4)
+    mingw (>= 1.1)
+    seven_zip (>= 0.0.0)
+  chef_handler (3.0.2)
+  datadog (2.14.1)
+    apt (>= 0.0.0)
+    chef_handler (>= 1.1)
+    windows (>= 0.0.0)
+    yum (>= 3.0)
+  firebolt (0.0.2)
+    aws (>= 0.0.0)
+    idt_infra_tools (>= 0.0.0)
+    java (>= 0.0.0)
+    supervisor (>= 0.0.0)
+    tar (>= 0.0.0)
+  homebrew (5.0.3)
+  idt_infra_tools (0.1.3)
+    apt (>= 0.0.0)
+    build-essential (>= 0.0.0)
+    magic_shell (>= 0.0.0)
+    ntp (>= 0.0.0)
+    python (>= 0.0.0)
+    timezone-ii (>= 0.0.0)
+  java (1.50.0)
+    apt (>= 0.0.0)
+    homebrew (>= 0.0.0)
+    windows (>= 0.0.0)
+  magic_shell (1.0.0)
+  mingw (2.0.2)
+    seven_zip (>= 0.0.0)
+  ntp (3.5.6)
+  ohai (5.2.2)
+  openssl (8.1.2)
+  papertrail (1.0.1)
+    apt (>= 0.0.0)
+    yum (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  python (1.4.6)
+    build-essential (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  rsyslog (6.0.4)
+  seven_zip (2.0.2)
+    windows (>= 1.2.2)
+  supervisor (0.4.12)
+    python (>= 0.0.0)
+  tar (2.1.1)
+  timezone-ii (0.2.0)
+  windows (4.0.1)
+  yum (5.1.0)
+  yum-epel (3.1.0)
